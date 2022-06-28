@@ -1,41 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:imc_calculator/presentation/ImcCalculator/imc_calculator_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 class ImcCalculatorScreen extends StatelessWidget {
+  const ImcCalculatorScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Calculadora IMC"),
       ),
-      body: ImgCalculatorBody(),
+      body: const ImgCalculatorBody(),
     );
   }
 }
 
 class ImgCalculatorBody extends StatelessWidget {
+  const ImgCalculatorBody({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: CalculatorForm(),
+    return Column(
+      children: [
+        CalculatorForm(),
+        const ImcResultCard(),
+      ],
     );
   }
 }
 
-class CalculatorForm extends StatefulWidget {
-  @override
-  _CalculatorFormState createState() => _CalculatorFormState();
-}
+class CalculatorForm extends StatelessWidget {
+  CalculatorForm({Key? key}) : super(key: key);
 
-class _CalculatorFormState extends State<CalculatorForm> {
+  TextEditingController weightController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Form(
       child: Column(
         children: [
-          CustomTextField(),
-          CustomTextField(),
+          CustomTextField(
+            label: "Peso",
+            controller: weightController,
+          ),
+          CustomTextField(
+            label: "Altura",
+            controller: heightController,
+          ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Provider.of<ImcCalculatorViewModel>(context, listen: false)
+                  .parseAndUpdate(weightController.text, heightController.text);
+            },
             child: const Text("Calcular"),
           ),
         ],
@@ -45,24 +63,39 @@ class _CalculatorFormState extends State<CalculatorForm> {
 }
 
 class CustomTextField extends StatefulWidget {
+  const CustomTextField({super.key, required this.label, this.controller});
+
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
+
+  final String label;
+  final TextEditingController? controller;
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  String _text = "";
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text("Label"),
+        Text(widget.label),
         TextField(
-          onChanged: (value) => setState(() {
-            _text = value;
-          }),
+          controller: widget.controller,
         ),
       ],
     );
+  }
+}
+
+class ImcResultCard extends StatelessWidget {
+  const ImcResultCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ImcCalculatorViewModel>(
+        builder: ((context, viewModel, child) {
+      return viewModel.shouldShowImcResult()
+          ? Text(viewModel.imcToString())
+          : Container();
+    }));
   }
 }

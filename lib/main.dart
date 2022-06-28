@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:imc_calculator/presentation/ImcCalculator/imc_calculator.dart';
+import 'package:imc_calculator/presentation/ImcCalculator/imc_calculator_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: ((context) => ImcCalculatorViewModel()),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
