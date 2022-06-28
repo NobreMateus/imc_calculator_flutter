@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:imc_calculator/presentation/ImcCalculator/imc_calculator.dart';
-import 'package:imc_calculator/presentation/ImcCalculator/imc_calculator_viewmodel.dart';
+import 'package:imc_calculator/presentation/ImcCalculator/viewModel/imc_calculator_viewmodel.dart';
 import 'package:provider/provider.dart';
+
+import 'presentation/ImcCalculator/view/imc_calculator_screen.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: ImcCalculatorScreen(),
+      home: const ImcCalculatorScreen(),
     );
   }
 }
