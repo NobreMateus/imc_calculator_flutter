@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:imc_calculator/presentation/ImcCalculator/viewModel/imc_calculator_viewmodel.dart';
+import 'package:imc_calculator/presentation/ImcList/viewModel/imc_list_viewmodel.dart';
 import 'package:provider/provider.dart';
-
 import 'presentation/ImcCalculator/view/imc_calculator_screen.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: ((context) => ImcCalculatorViewModel()),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => ImcCalculatorViewModel(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => ImcListViewModel(),
+      ),
+    ],
     child: const MyApp(),
   ));
 }
