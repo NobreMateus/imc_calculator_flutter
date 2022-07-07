@@ -33,9 +33,6 @@ class ImcCalculatorViewModel extends ChangeNotifier {
   }
 
   String imcToString() {
-    if (imc == null) {
-      return "";
-    }
-    return imc.toString();
+    return imc?.toStringAsFixed(2) ?? "";
   }
 }

@@ -8,12 +8,20 @@ class ImcCalculatorBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CalculatorForm(),
-        const ImcResultCard(),
-        const ImcListView(),
-      ],
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 36,
+          ),
+          CalculatorForm(),
+          const SizedBox(
+            height: 48,
+          ),
+          const ImcResultCard(),
+        ],
+      ),
     );
   }
 }

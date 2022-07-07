@@ -17,14 +17,22 @@ class CalculatorForm extends StatelessWidget {
         children: [
           CustomTextField(
             label: "Peso",
+            unit: "Kg",
             controller: weightController,
+          ),
+          const SizedBox(
+            height: 16,
           ),
           CustomTextField(
             label: "Altura",
+            unit: "M",
             controller: heightController,
           ),
-          ElevatedButton(
-            onPressed: () {
+          const SizedBox(
+            height: 36,
+          ),
+          GestureDetector(
+            onTap: () {
               Provider.of<ImcCalculatorViewModel>(context, listen: false)
                   .parseAndUpdate(weightController.text, heightController.text);
               double? imc =
@@ -32,7 +40,13 @@ class CalculatorForm extends StatelessWidget {
                       .imc;
               Provider.of<ImcListViewModel>(context, listen: false).addImc(imc);
             },
-            child: const Text("Calcular"),
+            child: Text(
+              "CALCULAR",
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700),
+            ),
           ),
         ],
       ),

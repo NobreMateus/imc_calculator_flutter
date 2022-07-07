@@ -10,8 +10,88 @@ class ImcResultCard extends StatelessWidget {
     return Consumer<ImcCalculatorViewModel>(
         builder: ((context, viewModel, child) {
       return viewModel.shouldShowImcResult()
-          ? Text(viewModel.imcToString())
+          ? ResultCard(
+              imcValue: viewModel.imcToString(),
+              categoryValue: "SAUDÁVEL",
+            )
           : Container();
     }));
+  }
+}
+
+class ResultCard extends StatelessWidget {
+  ResultCard({super.key, required this.imcValue, required this.categoryValue});
+
+  String imcValue;
+  String categoryValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          "VOCÊ ESTÁ",
+          style: TextStyle(
+            color: Theme.of(context).secondaryHeaderColor,
+            fontSize: 12,
+          ),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        Text(
+          categoryValue,
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontSize: 27,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(
+          height: 24,
+        ),
+        Text(
+          "SEU PESO IDEAL É ENTRE",
+          style: TextStyle(
+            color: Theme.of(context).secondaryHeaderColor,
+            fontSize: 12,
+          ),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        Text(
+          "50kg A 65kg",
+          style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: 27,
+              fontWeight: FontWeight.w700),
+        ),
+        const SizedBox(
+          height: 56,
+        ),
+        Text(
+          imcValue,
+          style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: 20,
+              fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Container(
+          height: 100,
+          width: 300,
+          decoration: const BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(150),
+              topRight: Radius.circular(150),
+            ),
+          ),
+        )
+      ],
+    );
   }
 }
