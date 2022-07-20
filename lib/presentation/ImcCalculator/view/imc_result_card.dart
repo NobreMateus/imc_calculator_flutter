@@ -80,17 +80,6 @@ class ResultCard extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Container(
-          height: 100,
-          width: 300,
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(150),
-              topRight: Radius.circular(150),
-            ),
-          ),
-        )
       ],
     );
   }
