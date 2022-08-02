@@ -3,9 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imc_calculator/presentation/ImcCalculator/bloc/imc_calculator_bloc.dart';
 import 'package:imc_calculator/presentation/ImcCalculator/bloc/imc_calculator_event.dart';
 import 'package:imc_calculator/presentation/ImcCalculator/bloc/imc_calculator_state.dart';
-import 'package:imc_calculator/presentation/ImcCalculator/viewModel/imc_calculator_viewmodel.dart';
-import 'package:imc_calculator/presentation/ImcList/viewModel/imc_list_viewmodel.dart';
-import 'package:provider/provider.dart';
 import 'presentation/ImcCalculator/view/imc_calculator_screen.dart';
 
 void main() {
@@ -33,11 +30,12 @@ class MyApp extends StatelessWidget {
           primaryColor: const Color.fromARGB(255, 11, 181, 138),
           secondaryHeaderColor: const Color.fromARGB(255, 170, 170, 170),
           backgroundColor: Colors.white),
-      home: BlocProvider(
-        create: (BuildContext context) =>
-            ImcCalculatorBloc(ImcEmptyFormState())..add(ImcCalculateEvent()),
-        child: const ImcCalculatorScreen(),
-      ),
+      home: const ImcCalculatorScreen(),
+      // home: BlocProvider(
+      //   create: (BuildContext context) =>
+      //       ImcCalculatorBloc(ImcEmptyFormState())..add(ImcCalculateEvent()),
+      //   child: const ImcCalculatorScreen(),
+      // ),
     );
   }
 }

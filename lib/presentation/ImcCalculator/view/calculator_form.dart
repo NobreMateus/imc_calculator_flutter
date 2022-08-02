@@ -1,12 +1,8 @@
-// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:imc_calculator/presentation/ImcList/viewModel/imc_list_viewmodel.dart';
-import 'package:provider/provider.dart';
-import '../viewModel/imc_calculator_viewmodel.dart';
 import 'custom_textfield.dart';
 
 class CalculatorForm extends StatefulWidget {
-  CalculatorForm({Key? key}) : super(key: key);
+  const CalculatorForm({Key? key}) : super(key: key);
 
   @override
   State<CalculatorForm> createState() => _CalculatorFormState();
@@ -80,13 +76,7 @@ class CalculateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Provider.of<ImcCalculatorViewModel>(context, listen: false)
-            .parseAndUpdate(weightController.text, heightController.text);
-        double? imc =
-            Provider.of<ImcCalculatorViewModel>(context, listen: false).imc;
-        Provider.of<ImcListViewModel>(context, listen: false).addImc(imc);
-      },
+      onTap: () {},
       child: Text(
         "CALCULAR",
         style: TextStyle(
