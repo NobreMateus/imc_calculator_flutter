@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:imc_calculator/presentation/ImcCalculator/bloc/imc_calculator_bloc.dart';
+import '../bloc/imc_calculator_event.dart';
 import 'custom_textfield.dart';
 
 class CalculatorForm extends StatefulWidget {
@@ -39,24 +42,6 @@ class _CalculatorFormState extends State<CalculatorForm> {
             weightController: weightController,
             heightController: heightController,
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                opacity = 1;
-              });
-            },
-            child: AnimatedOpacity(
-              duration: const Duration(seconds: 2),
-              opacity: opacity,
-              child: Text(
-                "SALVAR RESULTADO",
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -76,7 +61,9 @@ class CalculateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        BlocProvider.of<ImcCalculatorBloc>(context).add(ImcCalculateEvent());
+      },
       child: Text(
         "CALCULAR",
         style: TextStyle(

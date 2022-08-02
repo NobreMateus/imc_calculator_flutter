@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:imc_calculator/presentation/ImcCalculator/bloc/imc_calculator_bloc.dart';
 import 'imc_calculator_body.dart';
 
 class ImcCalculatorScreen extends StatelessWidget {
@@ -19,7 +21,9 @@ class ImcCalculatorScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
       ),
-      body: const ImcCalculatorBody(),
+      body: BlocProvider(
+          create: (context) => ImcCalculatorBloc(),
+          child: const ImcCalculatorBody()),
     );
   }
 }
