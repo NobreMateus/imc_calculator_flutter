@@ -62,7 +62,10 @@ class CalculateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<ImcCalculatorBloc>(context).add(ImcCalculateEvent());
+        BlocProvider.of<ImcCalculatorBloc>(context).add(ImcCalculateEvent(
+          height: 1.73,
+          weight: 73,
+        ));
       },
       child: Text(
         "CALCULAR",
