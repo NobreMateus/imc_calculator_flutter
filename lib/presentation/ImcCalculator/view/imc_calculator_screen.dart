@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:imc_calculator/domain/useCases/imc_calculate_category.dart';
+import 'package:imc_calculator/domain/useCases/imc_calculate_usecase.dart';
 import 'package:imc_calculator/presentation/ImcCalculator/bloc/imc_calculator_bloc.dart';
 import 'imc_calculator_body.dart';
 
@@ -22,7 +24,10 @@ class ImcCalculatorScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: BlocProvider(
-          create: (context) => ImcCalculatorBloc(),
+          create: (context) => ImcCalculatorBloc(
+                imcCalculateUseCase: ImcCalculateUseCase(),
+                imcCategoryUseCase: ImcCalculateCategoryUseCase(),
+              ),
           child: const ImcCalculatorBody()),
     );
   }

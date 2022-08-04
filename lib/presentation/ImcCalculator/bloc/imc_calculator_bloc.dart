@@ -1,13 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imc_calculator/domain/entities/imc_category.dart';
-import 'package:imc_calculator/domain/useCases/imc_calculate_category.dart';
 import 'package:imc_calculator/presentation/ImcCalculator/bloc/imc_calculator_event.dart';
 
-import '../../../domain/useCases/imc_calculate_usecase.dart';
+import '../../../domain/interfaces/imc_calculate_category_abstract.dart';
+import '../../../domain/interfaces/imc_calculate_usecase_abstract.dart';
 import 'imc_calculator_state.dart';
 
 class ImcCalculatorBloc extends Bloc<ImcCalculatorEvent, ImcState> {
-  ImcCalculatorBloc() : super(ImcEmptyFormState()) {
+  final ImcCalculateUsecaseAbstract imcCalculateUseCase;
+  final ImcCalculateCategoryAbstract imcCategoryUseCase;
+
+  ImcCalculatorBloc(
+      {required this.imcCalculateUseCase, required this.imcCategoryUseCase})
+      : super(ImcEmptyFormState()) {
     on<ImcCalculateEvent>(_update);
   }
 
@@ -18,9 +23,6 @@ class ImcCalculatorBloc extends Bloc<ImcCalculatorEvent, ImcState> {
   }
 
   _calculateImcValues(double height, double weight, Emitter<ImcState> emit) {
-    var imcCalculateUseCase = ImcCalculateUseCase();
-    var imcCategoryUseCase = ImcCalculateCategoryUseCase();
-
     double imcValue = imcCalculateUseCase.execute(
       weight,
       height,
